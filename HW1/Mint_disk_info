@@ -1,0 +1,25 @@
+  *-disk
+       описание: SCSI Disk
+       продукт: Virtual Disk
+       производитель: Msft
+       физический ID: 0.0.0
+       сведения о шине: scsi@0:0.0.0
+       логическое имя: /dev/sda
+       версия: 1.0
+       размер: 127GiB (136GB)
+       возможности: gpt-1.00 partitioned partitioned:gpt
+       конфигурация: ansiversion=5 guid=02d4a0df-9d83-4f08-9f4e-3369010c281e logicalsectorsize=512 sectorsize=4096
+  *-cdrom
+       описание: SCSI CD-ROM
+       продукт: Virtual DVD-ROM
+       производитель: Msft
+       физический ID: 0.0.1
+       сведения о шине: scsi@0:0.0.1
+       логическое имя: /dev/cdrom
+       логическое имя: /dev/sr0
+       версия: 1.0
+       возможности: removable audio
+       конфигурация: status=ready
+     *-medium
+          физический ID: 0
+          логическое имя: /dev/cdrom

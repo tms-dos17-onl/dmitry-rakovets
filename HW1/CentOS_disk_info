@@ -1,0 +1,22 @@
+  *-cdrom
+       description: DVD reader
+       product: Virtual CD/ROM
+       vendor: Msft
+       physical id: 0.0.0
+       bus info: scsi@1:0.0.0
+       logical name: /dev/cdrom
+       logical name: /dev/sr0
+       version: 1.0
+       capabilities: removable audio dvd
+       configuration: ansiversion=5 status=nodisc
+  *-disk
+       description: SCSI Disk
+       product: Virtual Disk
+       vendor: Msft
+       physical id: 0.0.0
+       bus info: scsi@2:0.0.0
+       logical name: /dev/sda
+       version: 1.0
+       size: 20GiB (21GB)
+       capabilities: partitioned partitioned:dos
+       configuration: ansiversion=5 logicalsectorsize=512 sectorsize=4096 signature=000b993f

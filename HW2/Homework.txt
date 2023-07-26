@@ -1,0 +1,105 @@
+№ 1. Смонтировать /home на отдельный раздел
+
+Добавил в ВМ новый диск (sdb)
+dmitry@Mint-Study:~$ sudo fdisk -l    
+Диск /dev/sda: 127 GiB, 136365211648 байт, 266338304 секторов
+Disk model: Virtual Disk    
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 4096 байт
+Размер I/O (минимальный/оптимальный): 4096 байт / 4096 байт
+Тип метки диска: gpt
+Идентификатор диска: 02D4A0DF-9D83-4F08-9F4E-3369010C281E
+Устр-во     начало     Конец   Секторы Размер Тип
+/dev/sda1     2048   1050623   1048576   512M EFI
+/dev/sda2  1050624 266336255 265285632 126,5G Файловая система Linux
+Диск /dev/sdb: 30 GiB, 32212254720 байт, 62914560 секторов
+Disk model: Virtual Disk    
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 4096 байт
+Размер I/O (минимальный/оптимальный): 4096 байт / 4096 байт
+
+dmitry@Mint-Study:~$ sudo fdisk /dev/sdb
+Команда (m для справки): n
+Выберите (по умолчанию - p): p
+Команда (m для справки): w
+
+dmitry@Mint-Study:~$ sudo fdisk -l
+Диск /dev/sda: 127 GiB, 136365211648 байт, 266338304 секторов
+Disk model: Virtual Disk    
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 4096 байт
+Размер I/O (минимальный/оптимальный): 4096 байт / 4096 байт
+Тип метки диска: gpt
+Идентификатор диска: 02D4A0DF-9D83-4F08-9F4E-3369010C281E
+Устр-во     начало     Конец   Секторы Размер Тип
+/dev/sda1     2048   1050623   1048576   512M EFI
+/dev/sda2  1050624 266336255 265285632 126,5G Файловая система Linux
+Диск /dev/sdb: 30 GiB, 32212254720 байт, 62914560 секторов
+Disk model: Virtual Disk    
+Единицы: секторов по 1 * 512 = 512 байт
+Размер сектора (логический/физический): 512 байт / 4096 байт
+Размер I/O (минимальный/оптимальный): 4096 байт / 4096 байт
+Тип метки диска: dos
+Идентификатор диска: 0xcd317c93
+Устр-во    Загрузочный начало    Конец  Секторы Размер Идентификатор Тип
+/dev/sdb1                2048 62914559 62912512    30G            83 Linux
+
+dmitry@Mint-Study:~$ sudo mkfs -t xfs /dev/sdb1
+meta-data=/dev/sdb1              isize=512    agcount=4, agsize=1966016 blks
+         =                       sectsz=4096  attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=0 inobtcount=0
+data     =                       bsize=4096   blocks=7864064, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=3839, version=2
+         =                       sectsz=4096  sunit=1 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+Discarding blocks...Done.
+
+dmitry@Mint-Study:~$ cp -a /home /tmp
+
+dmitry@Mint-Study:~$ sudo mount /dev/sdb1 /home/
+
+dmitry@Mint-Study:~$ sudo cp -a /tmp/home/* /home/
+
+dmitry@Mint-Study:~$ df -h
+Файл.система   Размер Использовано  Дост Использовано% Cмонтировано в
+tmpfs            190M         1,1M  189M            1% /run
+/dev/sda2        124G          18G  101G           15% /
+tmpfs            949M            0  949M            0% /dev/shm
+tmpfs            5,0M            0  5,0M            0% /run/lock
+/dev/sda1        511M         6,1M  505M            2% /boot/efi
+tmpfs            190M         4,5M  186M            3% /run/user/1000
+/dev/sdb1         30G         943M   30G            4% /home
+
+dmitry@Mint-Study:~$ sudo gedit /dev/fstab
+/dev/sdb1 /home xfs defaults 0 0
+
+
+
+_________________________________________________________________________________________________
+№ 2. Создать нового пользователя user_with_group с home-директорией /var/home/user
+dmitry@Mint-Study:~$ sudo mkdir -p /var/home/user
+dmitry@Mint-Study:~$ sudo useradd -m -d /var/home/user user_with_group
+dmitry@Mint-Study:~$ sudo passwd user_with_group
+
+
+
+_________________________________________________________________________________________________
+№ 3. Создать новую группу пользователей priv_group, перенести в нее пользователя user_with_group
+dmitry@Mint-Study:~$ sudo groupadd priv_group
+dmitry@Mint-Study:~$ sudo usermod -a -G priv_group user_with_group
+
+
+
+_________________________________________________________________________________________________
+№ 4. Cоздать директорию и выдать права на нее только группе этого пользователя
+dmitry@Mint-Study:~$ mkdir /home/dmitry/test_directory
+dmitry@Mint-Study:~$ sudo chgrp priv_group /home/dmitry/test_directory
+
+
+_________________________________________________________________________________________________
+№ 5. Установить ntpd(chrony), разрешить пользователю user_with_group выполнять команду systemctl restart chronyd (нужны права sudo)
+dmitry@Mint-Study:~$ sudo apt install chrony
+user_with_group ALL=(ALL) /bin/systemctl restart chronyd

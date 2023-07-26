@@ -1,0 +1,67 @@
+Module                  Size  Used by
+nfnetlink              20480  0
+zfs                  4112384  6
+zunicode              348160  1 zfs
+zzstd                 491520  1 zfs
+zlua                  163840  1 zfs
+zavl                   16384  1 zfs
+icp                   311296  1 zfs
+zcommon               106496  2 zfs,icp
+znvpair                98304  2 zfs,zcommon
+nls_iso8859_1          16384  1
+spl                   118784  6 zfs,icp,zzstd,znvpair,zcommon,zavl
+intel_rapl_msr         20480  0
+serio_raw              20480  0
+intel_rapl_common      40960  1 intel_rapl_msr
+hv_balloon             36864  0
+hyperv_fb              24576  0
+rapl                   20480  0
+joydev                 32768  0
+mac_hid                16384  0
+sch_fq_codel           20480  5
+msr                    16384  0
+parport_pc             49152  0
+ppdev                  24576  0
+lp                     28672  0
+parport                69632  3 parport_pc,lp,ppdev
+ramoops                32768  0
+reed_solomon           28672  1 ramoops
+pstore_blk             16384  0
+efi_pstore             16384  0
+pstore_zone            32768  1 pstore_blk
+ip_tables              32768  0
+x_tables               53248  1 ip_tables
+autofs4                49152  2
+btrfs                1560576  0
+blake2b_generic        20480  0
+xor                    24576  1 btrfs
+zstd_compress         229376  1 btrfs
+raid6_pq              122880  1 btrfs
+libcrc32c              16384  1 btrfs
+dm_mirror              24576  0
+dm_region_hash         24576  1 dm_mirror
+dm_log                 20480  2 dm_region_hash,dm_mirror
+hyperv_drm             20480  1
+drm_kms_helper        311296  2 hyperv_drm
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            20480  1 drm_kms_helper
+sysimgblt              16384  1 drm_kms_helper
+fb_sys_fops            16384  1 drm_kms_helper
+cec                    61440  1 drm_kms_helper
+hid_generic            16384  0
+rc_core                65536  1 cec
+hid_hyperv             16384  0
+drm                   622592  4 drm_kms_helper,hyperv_drm
+hv_netvsc              98304  0
+hid                   151552  2 hid_hyperv,hid_generic
+hv_storvsc             24576  2
+scsi_transport_fc      98304  1 hv_storvsc
+hyperv_keyboard        16384  0
+hv_utils               45056  2
+crct10dif_pclmul       16384  1
+crc32_pclmul           16384  0
+ghash_clmulni_intel    16384  0
+aesni_intel           376832  0
+crypto_simd            16384  1 aesni_intel
+cryptd                 24576  2 crypto_simd,ghash_clmulni_intel
+hv_vmbus              135168  8 hv_balloon,hv_utils,hv_netvsc,hid_hyperv,hv_storvsc,hyperv_keyboard,hyperv_drm,hyperv_fb
