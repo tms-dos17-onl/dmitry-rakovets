@@ -18,14 +18,61 @@ do
   x=$(( $x + 1 ))
 done
 dmitry@Mint-Study:~$ chmod +x hw4.sh
-dmitry@Mint-Study:~$ ./hw4.sh
-
+dmitry@Mint-Study:~$ ./hw4.sh &
+[1] 22354
 
 
 __________________________________________________________________________________________________________________________________________________________________
 № 3. Убедиться, что процесс продолжил работу после завершения сессии
 dmitry@Mint-Study:~$ ps aux | grep hw4.sh
-dmitry     21611  0.0  0.0  11776  2320 pts/0    S+   14:28   0:00 grep --color=auto hw4.sh
+dmitry     22354  0.0  0.0  12640  3960 pts/0    S    15:31   0:00 /bin/bash ./hw4.sh
+dmitry     22362  0.0  0.0  11776  2536 pts/0    S+   15:31   0:00 grep --color=auto hw4.sh
+
 
 __________________________________________________________________________________________________________________________________________________________________
 №4. Убить процесс, запущенный в фоновом режиме
+dmitry@Mint-Study:~$ sudo kill -9 22354
+[1]+  Убито              ./hw4.sh
+
+
+__________________________________________________________________________________________________________________________________________________________________
+№5. Написать свой сервис под управлением systemd, добавить его в автозагрузку (можно использовать процесс из п.2)
+dmitry@Mint-Study:~$ cat /etc/systemd/system/hw4.service
+[Unit]
+Description=hw4_service
+[Service]
+User=dmitry
+ExecStart=/bin/bash /home/dmitry/hw4.sh
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+dmitry@Mint-Study:~$ sudo systemctl daemon-reload
+
+dmitry@Mint-Study:~$ sudo systemctl enable hw4.service   
+Created symlink /etc/systemd/system/multi-user.target.wants/hw4.service → /etc/systemd/system/hw4.service.
+dmitry@Mint-Study:~$ sudo systemctl start  hw4.service
+dmitry@Mint-Study:~$ sudo systemctl status  hw4.service
+● hw4.service - hw4_service
+     Loaded: loaded (/etc/systemd/system/hw4.service; enabled; vendor preset: enabled)
+     Active: active (running) since Thu 2023-07-27 16:44:23 MSK; 5s ago
+   Main PID: 24155 (bash)
+      Tasks: 2 (limit: 2122)
+     Memory: 556.0K
+        CPU: 16ms
+     CGroup: /system.slice/hw4.service
+             ├─24155 /bin/bash /home/dmitry/hw4.sh
+             └─24157 sleep 5
+
+июл 27 16:44:23 Mint-Study systemd[1]: Started hw4_service.
+
+dmitry@Mint-Study:~$ sudo systemctl stop hw4.service
+
+
+__________________________________________________________________________________________________________________________________________________________________
+№6. Посмотреть логи своего сервиса.
+dmitry@Mint-Study:~$ journalctl -u hw4.service
+июл 27 16:44:23 Mint-Study systemd[1]: Started hw4_service.
+июл 27 16:48:14 Mint-Study systemd[1]: Stopping hw4_service...
+июл 27 16:48:14 Mint-Study systemd[1]: hw4.service: Deactivated successfully.
+июл 27 16:48:14 Mint-Study systemd[1]: Stopped hw4_service.

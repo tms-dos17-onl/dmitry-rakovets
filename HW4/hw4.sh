@@ -1,5 +1,5 @@
 #!/bin/bash
-x=1
+x=2
 while [ $x -gt 1 ]
 do
   echo "$x" >> hw4.log
