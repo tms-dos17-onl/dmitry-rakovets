@@ -215,7 +215,7 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git commit -m 'Edit LICENSE'
 
 dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git merge support
 Уже актуально.
-п``` 
+``` 
 16. Переключиться на ветку develop и сделать rebase относительно ветки main.
 ```
 
