@@ -101,3 +101,13 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git reset --hard HEAD~3
 ```
 
 ``` 
+
+> warning Для выполнения задания использовать Markdown, а именно заголовок и списки
+
+13. Создать из ветки main ветку support и создать там файл LICENSE в корне репозитория с содержимым https://www.apache.org/licenses/LICENSE-2.0.txt. Создать коммит. Вывести последние 3 коммитa.
+14. Переключиться обратно на ветку main и создать там файл LICENSE в корне репозитория с содержимым https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt. Создать коммит. Вывести последние 3 коммитa.
+15. Сделать merge ветки support в ветку main и решить конфликты путем выбора содержимого только одной лицензии.
+16. Переключиться на ветку develop и сделать rebase относительно ветки main.
+17. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
+18. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
+19. Зайти в свой репозиторий на GitHub и создать Pull Request из ветки develop в ветку main.
