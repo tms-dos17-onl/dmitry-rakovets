@@ -218,11 +218,28 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git merge support
 ``` 
 16. Переключиться на ветку develop и сделать rebase относительно ветки main.
 ```
-
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git checkout develop
+Уже на «develop»
+Эта ветка соответствует «origin/develop».
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git rebase  main
+Текущая ветка develop уже в актуальном состоянии.
 ``` 
 17. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
 ```
-
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git log -10 --oneline --graph
+* bebcdcb (HEAD -> develop, origin/develop, main) My goals
+* 4d5c838 (origin/main, origin/HEAD) push exer 1-16
+*   4d56095 Edit LICENSE
+|\  
+| * ebd6448 (origin/support, support) Add LICENSE
+* | f3b72cf Add LICENSE in main
+|/  
+* 18fc11a add file validate-shell.yaml
+*   c98fd1f Merge branch 'main' of https://github.com/tms-dos17-onl/dmitry-rakovets
+|\  
+| * 547c398 Update Homework.md
+| * cd4ec26 Update Homework.md
+* | 238289e Create file README.md
 ``` 
 18. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
 ```
