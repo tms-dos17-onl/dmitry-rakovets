@@ -83,7 +83,14 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git reset --hard HEAD~3
 ```
 8. Вернуть коммит, где добавляется пустой файл README.md. Для этого найти ID коммита в git reflog, а затем сделать cherry-pick.
 ```
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git reflog
+2a34ef8 (HEAD -> main) HEAD@{0}: reset: moving to HEAD~3
+5ba3c4d HEAD@{1}: revert: Revert "Hello DevOps""
+606772a HEAD@{2}: revert: Revert "Hello DevOps"
+19da12f HEAD@{3}: commit: Hello DevOps
+2a34ef8 (HEAD -> main) HEAD@{4}: commit: Create file README.md
 
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git cherry-pick 2a34ef8
 ```
 9. Удалить последний коммит с помощью git reset.
 ```
