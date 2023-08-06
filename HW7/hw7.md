@@ -243,9 +243,19 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git log -10 --oneline --graph
 ``` 
 18. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
 ```
+mitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git checkout develop
+M	HW7/hw7.md
+Уже на «develop»
+Эта ветка соответствует «origin/develop».
+
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git push origin develop
+
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git log -2
+commit 313a2704bccb5f970caba9807c0a068e612fbcf0 (HEAD -> develop, origin/develop)
+Author: Dmitry Rakovets <rakovets.dmitry@gmail.com>
+Date:   Sun Aug 6 23:42:30 2023 +0300
+
+    push ex 1-18
 
 ``` 
 19. Зайти в свой репозиторий на GitHub и создать Pull Request из ветки develop в ветку main.
-```
-
-``` 
