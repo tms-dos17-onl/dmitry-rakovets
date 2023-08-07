@@ -172,8 +172,8 @@ secret.txt
 .config/hexchat/servlist.conf
           8.453 100%    4,03MB/s    0:00:00 (xfr#10, to-chk=3/19)
 .config/qt5ct/
-.config/qt5ct/qt5ct.conf
-            745 100%  145,51kB/s    0:00:00 (xfr#11, to-chk=2/19)
+.config/qt5ct/qt5ct.onf
+            745 100%  145,51kB/s    0:00:00 (xfr#11, to-chk=/19)
 .local/
 .local/share/
 .local/share/nano/
