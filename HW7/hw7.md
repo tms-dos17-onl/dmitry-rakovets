@@ -243,7 +243,7 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git log -10 --oneline --graph
 ``` 
 18. Запушить ветку develop. В истории коммитов должен быть мерж support -> main.
 ```
-mitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git checkout develop
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git checkout develop
 M	HW7/hw7.md
 Уже на «develop»
 Эта ветка соответствует «origin/develop».
