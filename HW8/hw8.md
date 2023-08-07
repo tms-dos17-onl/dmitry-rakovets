@@ -204,8 +204,8 @@ dmitry@Mint-Study:~$ sudo deluser --remove-home bob
 ``` 
 ## 17. С помощью утилиты htop определить какой процесс потребляет больше всего ресурсов в системе.
 
-file htop.png
-``` 
+![task17] (htop.png)
+
 ## 18. Вывести логи сервиса Firewall с помощью journalctl не прибегая к фильтрации с помощью grep.
 ```
 dmitry@Mint-Study:~$ journalctl -u ufw
