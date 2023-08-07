@@ -257,7 +257,4 @@ Date:   Sun Aug 6 23:42:30 2023 +0300
 
     push ex 1-18
 ``` 
-19. Зайти в свой репозиторий на GitHub и создать Pull Request из ветки develop в ветку main.
-```
-
-``` 
+19. Зайти в свой репозиторий на GitHub и создать Pull Request из ветки develop в ветку main. 
