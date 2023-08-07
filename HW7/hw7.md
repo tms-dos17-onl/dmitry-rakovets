@@ -218,7 +218,7 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git merge support
 ``` 
 16. Переключиться на ветку develop и сделать rebase относительно ветки main.
 ```
-mitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git checkout develop
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git checkout develop
 Уже на «develop»
 Эта ветка соответствует «origin/develop».
 dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git rebase  main
@@ -226,7 +226,7 @@ dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git rebase  main
 ``` 
 17. Вывести историю последних 10 коммитов в виде графа с помощью команды git log -10 --oneline --graph.
 ```
-mitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git log -10 --oneline --graph
+dmitry@Mint-Study:~/TechMeSkills/dmitry-rakovets$ git log -10 --oneline --graph
 * bebcdcb (HEAD -> develop, origin/develop, main) My goals
 * 4d5c838 (origin/main, origin/HEAD) push exer 1-16
 *   4d56095 Edit LICENSE
