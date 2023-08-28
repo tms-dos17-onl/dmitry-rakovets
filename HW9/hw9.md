@@ -156,20 +156,66 @@ traceroute to google.com (142.250.186.142), 30 hops max, 60 byte packets
 - запустить приложение от отдельного пользователя nexus.
 - реализовать systemd оболочку для запуска приложения как сервис.
 ```
+dmitry@Mint-Study:~$ sudo apt-get update
+dmitry@Mint-Study:~$ sudo apt install openjdk-8-jre-headless
+dmitry@Mint-Study:/opt$ sudo wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+dmitry@Mint-Study:/opt$ sudo tar -zxvf latest-unix.tar.gz
+dmitry@Mint-Study:/opt$ sudo mv /opt/nexus-3.59.0-01/ /opt/nexus
+dmitry@Mint-Study:/opt$ sudo adduser nexus
+dmitry@Mint-Study:/opt$ sudo visudo
+dmitry@Mint-Study:/opt$ sudo chown -R nexus:nexus /opt/nexus
+dmitry@Mint-Study:/opt$ sudo chown -R nexus:nexus /opt/sonatype-work
+dmitry@Mint-Study:/opt$ sudo nano /opt/nexus/bin/nexus.rc
+dmitry@Mint-Study:/opt$ sudo cat /opt/nexus/bin/nexus.rc
+run_as_user="nexus"
+dmitry@Mint-Study:/opt$ sudo nano /etc/systemd/system/nexus.service
+dmitry@Mint-Study:/opt$ sudo cat /etc/systemd/system/nexus.service
+[Unit]
+Description=nexus service
+After=network.target
 
+[Service]
+Type=forking
+LimitNOFILE=65536
+ExecStart=/opt/nexus/bin/nexus start
+ExecStop=/opt/nexus/bin/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+
+dmitry@Mint-Study:/opt$ sudo systemctl start nexus
+dmitry@Mint-Study:/opt$ sudo systemctl enable nexus
+dmitry@Mint-Study:/opt$ sudo systemctl status nexus
+Created symlink /etc/systemd/system/multi-user.target.wants/nexus.service → /etc/systemd/system/nexus.service.
+
+● nexus.service - nexus service
+     Loaded: loaded (/etc/systemd/system/nexus.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2023-08-28 17:15:33 MSK; 54s ago
+   Main PID: 8717 (java)
+      Tasks: 45 (limit: 2122)
+     Memory: 1.5G
+        CPU: 1min 43.360s
+     CGroup: /system.slice/nexus.service
+             └─8717 /usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -server -Dinstall4j.jvmDir=/usr/lib/jvm/java-1.8.0-openjdk-amd64 -Dexe4j.moduleName=/opt/nexus/bin/nexus -XX:+UnlockDiagnosticVMOptions -Dinstall4j.launcherId=245 -Dinsta>
+
+авг 28 17:15:32 Mint-Study systemd[1]: Starting nexus service...
+авг 28 17:15:33 Mint-Study nexus[8417]: Starting nexus
+авг 28 17:15:33 Mint-Study systemd[1]: Started nexus service.
 ``` 
 ## 9. Создать в Nexus proxy репозиторий для пакетов ОС и разрешить анонимный доступ.
-```
-
-``` 
+![Alt text](image.png)
 ## 10. Поменять для текущей VM основной репозиторий пакетов на созданный ранее proxy в Nexus.
 ```
-
+dmitry@Mint-Study:/opt$ sudo nano /etc/apt/sources.list
+deb http://localhost:8081/repository/apt_proxy/ jammy main restricted
 ``` 
 ## 11. Выполнить установку пакета snap и убедиться, что на proxy репозитории в Nexus появились пакеты.
 ```
+dmitry@Mint-Study:/opt$ sudo apt install snap
 
-``` 
+```
 ## 12. (**) На основании шагов из предыдущих пунктов создать DEB/RPM пакет для установки Nexus и загрузить его в Nexus.
 
 ** не обязательны к выполнению. Задачи на интерес
