@@ -214,8 +214,8 @@ deb http://localhost:8081/repository/apt_proxy/ jammy main restricted
 ## 11. Выполнить установку пакета snap и убедиться, что на proxy репозитории в Nexus появились пакеты.
 ```
 dmitry@Mint-Study:/opt$ sudo apt install snap
-
 ```
+![Alt text](image-1.png)
 ## 12. (**) На основании шагов из предыдущих пунктов создать DEB/RPM пакет для установки Nexus и загрузить его в Nexus.
 
 ** не обязательны к выполнению. Задачи на интерес
